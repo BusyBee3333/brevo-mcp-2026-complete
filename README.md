@@ -1,235 +1,328 @@
-> **🚀 Don't want to self-host?** [Join the waitlist for our fully managed solution →](https://mcpengage.com/brevo)
-> 
-> Zero setup. Zero maintenance. Just connect and automate.
+# Brevo MCP Server
 
----
+Complete Model Context Protocol (MCP) server for Brevo (formerly SendinBlue) with 55+ tools and 14 interactive apps.
 
-# 🚀 Brevo MCP Server — 2026 Complete Version
+## Features
 
-## 💡 What This Unlocks
+### 🛠️ 55+ Tools Across 10 Categories
 
-**This MCP server gives AI direct access to your entire Brevo email and SMS marketing workspace.** Instead of clicking through interfaces, you just *tell* it what you need.
+- **Contacts** (12 tools): List, get, create, update, delete, search, import, export, manage attributes, folders, and lists
+- **Email Campaigns** (9 tools): List, get, create, update, delete, send, schedule, reports, and link tracking
+- **Transactional** (4 tools): Send transactional emails/SMS, event tracking, aggregated reports
+- **Lists** (7 tools): Manage contact lists, add/remove contacts
+- **Senders** (6 tools): List, create, update, delete, validate sender domains
+- **Templates** (6 tools): List, create, update, delete templates, send test emails
+- **Automations** (5 tools): List workflows, activate/deactivate, get stats
+- **SMS Campaigns** (6 tools): List, create, update, send SMS campaigns, reports
+- **CRM Deals** (7 tools): Manage deals, pipelines, and stages
+- **Webhooks** (5 tools): List, create, update, delete webhooks for real-time events
 
-Brevo (formerly Sendinblue) is a complete email and SMS marketing platform used by 500,000+ businesses worldwide. This MCP server brings all its power into your AI workflow.
+### 📱 14 Interactive MCP Apps
 
-### 🎯 Email/SMS Marketing Power Moves
+1. **contact-dashboard** - Overview with key metrics and recent activity
+2. **contact-detail** - Full profile view with attributes and timeline
+3. **contact-grid** - Searchable, filterable grid view
+4. **campaign-dashboard** - Campaign performance metrics
+5. **campaign-builder** - Visual campaign creation wizard
+6. **automation-dashboard** - Marketing automation workflows
+7. **deal-pipeline** - Visual CRM pipeline with drag-and-drop
+8. **transactional-monitor** - Real-time transactional event tracking
+9. **email-template-gallery** - Browse and manage templates
+10. **sms-dashboard** - SMS campaign management
+11. **list-manager** - Contact lists and folders organization
+12. **report-dashboard** - Comprehensive analytics and insights
+13. **webhook-manager** - Configure webhooks for integrations
+14. **import-wizard** - Step-by-step contact import
 
-Stop context-switching between Claude and Brevo. The AI can directly control your campaigns:
-
-1. **Emergency campaign deployment** — "Send an urgent email about the service outage to all active customers, skip the test list"
-2. **Smart segmentation** — "Export all contacts who opened our last 3 campaigns but didn't convert, then create a re-engagement campaign"
-3. **Multi-channel orchestration** — "Check email deliverability for campaign #12345, if bounce rate is over 5%, send an SMS follow-up to non-openers"
-4. **Template-driven automation** — "List all active email templates, use template #8 to send welcome emails to the 50 contacts added this week"
-5. **Real-time list hygiene** — "Find all contacts with invalid emails from yesterday's imports, add them to the cleanup list, and notify me with stats"
-
-### 🔗 The Real Power: Combining Tools
-
-AI can chain multiple Brevo operations together:
-
-- Query campaign metrics → Segment by engagement → Create targeted follow-up → Schedule SMS backup
-- Import contacts → Validate emails → Auto-assign to lists → Trigger welcome sequence
-- Analyze template performance → Clone best performers → Customize for new segments → Deploy and track
-
-## 📦 What's Inside
-
-**8 powerful API tools** covering Brevo's email and SMS marketing platform:
-
-1. **send_email** — Send transactional emails with templates, attachments, and tracking
-2. **list_contacts** — Query and filter your contact database with pagination
-3. **add_contact** — Create contacts with custom attributes and list assignments
-4. **update_contact** — Modify contact data, list memberships, and preferences
-5. **list_campaigns** — Browse email campaigns by type, status, and date
-6. **create_campaign** — Build and schedule email campaigns programmatically
-7. **send_sms** — Send transactional SMS with delivery tracking
-8. **list_templates** — Access your email template library
-
-All with proper error handling, automatic authentication, and TypeScript types.
-
-**API Foundation:** [Brevo API v3](https://developers.brevo.com/reference/getting-started-1) (REST)
-
-## 🚀 Quick Start
-
-### Option 1: Claude Desktop (Local)
-
-1. **Clone and build:**
-   ```bash
-   git clone https://github.com/BusyBee3333/Brevo-MCP-2026-Complete.git
-   cd brevo-mcp-2026-complete
-   npm install
-   npm run build
-   ```
-
-2. **Get your Brevo API key:**
-   - Log into [Brevo](https://app.brevo.com/)
-   - Go to **Settings → SMTP & API → API Keys**
-   - Create a new API key (v3) with email and SMS permissions
-   - Copy the key (you'll only see it once)
-
-3. **Configure Claude Desktop:**
-   
-   On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   
-   On Windows: `%APPDATA%\Claude\claude_desktop_config.json`
-
-   ```json
-   {
-     "mcpServers": {
-       "brevo": {
-         "command": "node",
-         "args": ["/ABSOLUTE/PATH/TO/brevo-mcp-2026-complete/dist/index.js"],
-         "env": {
-           "BREVO_API_KEY": "xkeysib-abc123..."
-         }
-       }
-     }
-   }
-   ```
-
-4. **Restart Claude Desktop**
-
-### Option 2: Deploy to Railway
-
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/brevo-mcp)
-
-1. Click the button above
-2. Set `BREVO_API_KEY` in Railway dashboard
-3. Use the Railway URL as your MCP server endpoint
-
-### Option 3: Docker
+## Installation
 
 ```bash
-docker build -t brevo-mcp .
-docker run -p 3000:3000 \
-  -e BREVO_API_KEY=xkeysib-abc123... \
-  brevo-mcp
+npm install
+npm run build
 ```
 
-## 🔐 Authentication
+## Configuration
 
-**Brevo uses API key authentication** (v3 API):
-
-- **Header:** `api-key: YOUR_KEY`
-- **Format:** `xkeysib-...` (starts with xkeysib-)
-- **Permissions:** Email campaigns, Contacts, SMS (depending on your plan)
-- **Rate limits:** 300 calls/minute on free plans, higher on paid
-
-Get your API key at: https://app.brevo.com/settings/keys/api
-
-The MCP server handles authentication automatically—just set `BREVO_API_KEY`.
-
-## 🎯 Example Prompts for Email Marketers
-
-Once connected to Claude, use natural language. Here are real email marketing workflows:
-
-### Campaign Management
-- *"List all email campaigns from the last 30 days that are still in draft status"*
-- *"Create a new campaign called 'Spring Sale 2026' with template #45, targeting list #12"*
-- *"Show me all campaigns with 'webinar' in the name scheduled for this month"*
-
-### Contact Operations
-- *"Add these 5 contacts to list #8: [paste CSV data]"*
-- *"Find all contacts with Gmail addresses who signed up this week"*
-- *"Update contact jane@example.com: set FIRSTNAME to Jane, add to VIP list"*
-
-### Multi-Channel Workflows
-- *"Send a welcome email to everyone added to list #15 today using template #9"*
-- *"If bounce rate on campaign #789 is over 3%, send SMS backup to all recipients"*
-- *"List all templates with 'newsletter' in the name, show me #3's stats"*
-
-### Bulk Operations
-- *"Export all contacts modified in the last 7 days as JSON"*
-- *"Send 'Account Verified' email to all contacts with VERIFIED=true attribute"*
-- *"Check how many contacts are in lists #10, #11, and #12 combined"*
-
-## 🛠️ Development
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Brevo account (free or paid)
-
-### Setup
+Set your Brevo API key as an environment variable:
 
 ```bash
-git clone https://github.com/BusyBee3333/Brevo-MCP-2026-Complete.git
-cd brevo-mcp-2026-complete
-npm install
-cp .env.example .env
-# Edit .env with your Brevo API key
-npm run build
+export BREVO_API_KEY=your-api-key-here
+```
+
+Get your API key from: https://app.brevo.com/settings/keys/api
+
+## Usage
+
+### Running the Server
+
+```bash
 npm start
 ```
 
-### Testing
+Or with inline API key:
 
 ```bash
-npm test                  # Run all tests
-npm run test:watch        # Watch mode
-npm run test:coverage     # Coverage report
+BREVO_API_KEY=your-api-key-here npm start
 ```
 
-### Project Structure
+### MCP Client Configuration
+
+Add to your MCP client configuration (e.g., Claude Desktop):
+
+```json
+{
+  "mcpServers": {
+    "brevo": {
+      "command": "node",
+      "args": ["/path/to/brevo/dist/main.js"],
+      "env": {
+        "BREVO_API_KEY": "your-api-key-here"
+      }
+    }
+  }
+}
+```
+
+## Tool Examples
+
+### Create a Contact
+
+```typescript
+brevo_create_contact({
+  email: "user@example.com",
+  attributes: {
+    FIRSTNAME: "John",
+    LASTNAME: "Doe",
+    COMPANY: "Acme Inc"
+  },
+  listIds: [123]
+})
+```
+
+### Send Transactional Email
+
+```typescript
+brevo_send_transactional_email({
+  to: [{ email: "user@example.com", name: "John Doe" }],
+  sender: { email: "hello@company.com", name: "Company" },
+  subject: "Welcome!",
+  htmlContent: "<h1>Welcome to our service!</h1>",
+  tags: ["welcome", "onboarding"]
+})
+```
+
+### Create Email Campaign
+
+```typescript
+brevo_create_email_campaign({
+  name: "Monthly Newsletter",
+  subject: "Your Monthly Update",
+  sender: { name: "Company", email: "newsletter@company.com" },
+  htmlContent: "<html>...</html>",
+  recipients: {
+    listIds: [123],
+    exclusionListIds: [456]
+  },
+  scheduledAt: "2024-02-01T10:00:00Z"
+})
+```
+
+### List Contacts
+
+```typescript
+brevo_list_contacts({
+  limit: 50,
+  offset: 0,
+  listIds: [123],
+  sort: "desc"
+})
+```
+
+## API Reference
+
+### Contacts Tools
+
+- `brevo_list_contacts` - List all contacts with filters
+- `brevo_get_contact` - Get contact by email/ID
+- `brevo_create_contact` - Create new contact
+- `brevo_update_contact` - Update contact
+- `brevo_delete_contact` - Delete contact
+- `brevo_search_contacts` - Advanced contact search
+- `brevo_import_contacts` - Bulk import from CSV
+- `brevo_export_contacts` - Export contacts
+- `brevo_list_contact_attributes` - List all attributes
+- `brevo_create_contact_attribute` - Create custom attribute
+- `brevo_list_contact_folders` - List folders
+- `brevo_list_contact_lists` - List all lists
+
+### Campaign Tools
+
+- `brevo_list_email_campaigns` - List campaigns
+- `brevo_get_email_campaign` - Get campaign details
+- `brevo_create_email_campaign` - Create campaign
+- `brevo_update_email_campaign` - Update campaign
+- `brevo_delete_email_campaign` - Delete campaign
+- `brevo_send_email_campaign` - Send immediately
+- `brevo_schedule_email_campaign` - Schedule send
+- `brevo_get_campaign_report` - Get performance report
+- `brevo_list_campaign_links` - Get campaign links
+
+### Transactional Tools
+
+- `brevo_send_transactional_email` - Send transactional email
+- `brevo_send_transactional_sms` - Send SMS
+- `brevo_list_transactional_events` - List events
+- `brevo_get_aggregated_report` - Get statistics
+
+### Lists Tools
+
+- `brevo_list_lists` - List all contact lists
+- `brevo_get_list` - Get list details
+- `brevo_create_list` - Create new list
+- `brevo_update_list` - Update list
+- `brevo_delete_list` - Delete list
+- `brevo_add_contacts_to_list` - Add contacts
+- `brevo_remove_contacts_from_list` - Remove contacts
+
+### Templates Tools
+
+- `brevo_list_templates` - List templates
+- `brevo_get_template` - Get template
+- `brevo_create_template` - Create template
+- `brevo_update_template` - Update template
+- `brevo_delete_template` - Delete template
+- `brevo_send_test_template` - Send test email
+
+### Automation Tools
+
+- `brevo_list_workflows` - List workflows
+- `brevo_get_workflow` - Get workflow
+- `brevo_activate_workflow` - Activate workflow
+- `brevo_deactivate_workflow` - Deactivate workflow
+- `brevo_get_workflow_stats` - Get statistics
+
+### SMS Tools
+
+- `brevo_list_sms_campaigns` - List SMS campaigns
+- `brevo_get_sms_campaign` - Get campaign
+- `brevo_create_sms_campaign` - Create campaign
+- `brevo_update_sms_campaign` - Update campaign
+- `brevo_send_sms_campaign` - Send SMS campaign
+- `brevo_get_sms_campaign_report` - Get report
+
+### CRM Deals Tools
+
+- `brevo_list_deals` - List deals
+- `brevo_get_deal` - Get deal
+- `brevo_create_deal` - Create deal
+- `brevo_update_deal` - Update deal
+- `brevo_delete_deal` - Delete deal
+- `brevo_list_pipelines` - List pipelines
+- `brevo_list_deal_stages` - List stages
+
+### Webhook Tools
+
+- `brevo_list_webhooks` - List webhooks
+- `brevo_get_webhook` - Get webhook
+- `brevo_create_webhook` - Create webhook
+- `brevo_update_webhook` - Update webhook
+- `brevo_delete_webhook` - Delete webhook
+
+## MCP Apps
+
+All apps are accessible via MCP resources at `brevo://app/{app-name}`
+
+### Contact Apps
+- `contact-dashboard` - Metrics and overview
+- `contact-detail` - Full contact profile
+- `contact-grid` - Searchable contact table
+
+### Campaign Apps
+- `campaign-dashboard` - Campaign analytics
+- `campaign-builder` - Visual campaign creator
+
+### Other Apps
+- `automation-dashboard` - Workflow management
+- `transactional-monitor` - Real-time event tracking
+- `email-template-gallery` - Template browser
+- `sms-dashboard` - SMS management
+- `deal-pipeline` - CRM pipeline view
+- `list-manager` - List organization
+- `report-dashboard` - Analytics hub
+- `webhook-manager` - Webhook configuration
+- `import-wizard` - Contact import tool
+
+## Architecture
 
 ```
-brevo-mcp-2026-complete/
+brevo/
 ├── src/
-│   └── index.ts          # Main server implementation
-├── dist/                 # Compiled JavaScript
+│   ├── types/
+│   │   ├── index.ts           # TypeScript interfaces
+│   │   └── api-client.ts      # Brevo API client
+│   ├── tools/
+│   │   ├── contacts-tools.ts   # 12 contact tools
+│   │   ├── campaigns-tools.ts  # 9 campaign tools
+│   │   ├── transactional-tools.ts # 4 transactional tools
+│   │   ├── lists-tools.ts      # 7 list tools
+│   │   ├── senders-tools.ts    # 6 sender tools
+│   │   ├── templates-tools.ts  # 6 template tools
+│   │   ├── automations-tools.ts # 5 automation tools
+│   │   ├── sms-tools.ts        # 6 SMS tools
+│   │   ├── deals-tools.ts      # 7 CRM tools
+│   │   └── webhooks-tools.ts   # 5 webhook tools
+│   ├── apps/
+│   │   ├── contact-dashboard.ts
+│   │   ├── contact-detail.ts
+│   │   ├── contact-grid.ts
+│   │   ├── campaign-dashboard.ts
+│   │   ├── campaign-builder.ts
+│   │   ├── automation-dashboard.ts
+│   │   ├── deal-pipeline.ts
+│   │   ├── transactional-monitor.ts
+│   │   ├── template-gallery.ts
+│   │   ├── sms-dashboard.ts
+│   │   ├── list-manager.ts
+│   │   ├── report-dashboard.ts
+│   │   ├── webhook-manager.ts
+│   │   └── import-wizard.ts
+│   ├── server.ts              # MCP server implementation
+│   └── main.ts                # Entry point
 ├── package.json
 ├── tsconfig.json
-└── .env.example
+└── README.md
 ```
 
-## 🐛 Troubleshooting
+## Development
 
-### "Authentication failed"
-- Verify your API key starts with `xkeysib-`
-- Check key permissions at https://app.brevo.com/settings/keys/api
-- Ensure your account is active (not suspended)
+```bash
+# Install dependencies
+npm install
 
-### "Rate limit exceeded"
-- Free plans: 300 calls/minute
-- Wait 60 seconds or upgrade to paid plan
-- Use pagination (`limit` parameter) to reduce calls
+# Build
+npm run build
 
-### "Tools not appearing in Claude"
-- Restart Claude Desktop after updating config
-- Check that the path in `claude_desktop_config.json` is absolute (not relative)
-- Verify the build completed: `ls dist/index.js`
-- Check Claude Desktop logs: `tail -f ~/Library/Logs/Claude/mcp*.log`
+# Development mode (watch)
+npm run dev
 
-### "Invalid list ID" or "Template not found"
-- List IDs are numeric (e.g., 12, not "12")
-- Get valid IDs: *"List all my contact lists"* or *"Show me all templates"*
+# Clean build artifacts
+npm run clean
+```
 
-## 📖 Resources
+## API Documentation
 
-- **[Brevo API v3 Docs](https://developers.brevo.com/reference/getting-started-1)** — Official API reference
-- **[Brevo Help Center](https://help.brevo.com/)** — Tutorials and guides
-- **[MCP Protocol Spec](https://modelcontextprotocol.io/)** — How MCP servers work
-- **[Claude Desktop Docs](https://claude.ai/desktop)** — Installing and configuring Claude
-- **[MCPEngage Platform](https://mcpengine.pages.dev)** — Browse 30+ business MCP servers
+Brevo API v3 Documentation: https://developers.brevo.com/reference
 
-## 🤝 Contributing
+## License
 
-Contributions are welcome! Please:
+MIT
 
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/sms-analytics`)
-3. Commit your changes (`git commit -m 'Add SMS campaign stats tool'`)
-4. Push to the branch (`git push origin feature/sms-analytics`)
-5. Open a Pull Request
+## Support
 
-## 📄 License
+For issues and feature requests, please file an issue in the repository.
 
-MIT License - see [LICENSE](LICENSE) for details
+## Related Projects
 
-## 🙏 Credits
-
-Built by [MCPEngage](https://mcpengage.com) — AI infrastructure for business software.
-
-Want more MCP servers? Check out our [full catalog](https://mcpengage.com) covering 30+ business platforms including Constant Contact, Mailchimp, ActiveCampaign, and more.
-
----
-
-**Questions?** Open an issue or join our [Discord community](https://discord.gg/mcpengage).
+- [Brevo API Documentation](https://developers.brevo.com/)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
+- [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
